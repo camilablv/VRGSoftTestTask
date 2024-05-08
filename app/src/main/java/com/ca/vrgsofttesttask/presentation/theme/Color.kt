@@ -1,4 +1,4 @@
-package com.ca.vrgsofttesttask.ui.theme
+package com.ca.vrgsofttesttask.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
