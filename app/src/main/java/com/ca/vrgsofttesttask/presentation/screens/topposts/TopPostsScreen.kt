@@ -14,7 +14,11 @@ import com.ca.vrgsofttesttask.presentation.components.TopPostCard
 fun TopPostsScreen(
     
 ) {
-    val posts = listOf<Post>()
+    val posts = listOf<Post>(
+        Post(0, "Author 1", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 76),
+        Post(0, "Author 2", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 334),
+        Post(0, "Author 3", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 8),
+    )
     
     LazyColumn(
         modifier = Modifier
@@ -23,9 +27,7 @@ fun TopPostsScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(posts.size) {
-            posts[it].let { post -> 
-                TopPostCard(post = post)
-            }
+            TopPostCard(post = posts[it])
         }
     }
 }
