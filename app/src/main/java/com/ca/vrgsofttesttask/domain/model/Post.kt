@@ -1,9 +1,10 @@
 package com.ca.vrgsofttesttask.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Post(
-    val id: Int,
-    val author: String,
-    val created: Long,
-    val thumbnail: String? = null,
-    val commentCount: Int
+    @SerializedName("author_fullname") val author: String,
+    @SerializedName("created") val created: Long,
+    @SerializedName("thumbnail") val thumbnail: String? = null,
+    @SerializedName("num_comments") val commentCount: Int
 )

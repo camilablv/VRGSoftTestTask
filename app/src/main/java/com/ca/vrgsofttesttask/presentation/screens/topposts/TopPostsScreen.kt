@@ -7,18 +7,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ca.vrgsofttesttask.domain.model.Post
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ca.vrgsofttesttask.presentation.components.TopPostCard
 
 @Composable
 fun TopPostsScreen(
-    
+    viewModel: PostsViewModel = hiltViewModel()
 ) {
-    val posts = listOf<Post>(
-        Post(0, "Author 1", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 76),
-        Post(0, "Author 2", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 334),
-        Post(0, "Author 3", 5L, "https://a.thumbs.redditmedia.com/AdQDIe008O1Ikjc9el2m6aQVS808rs4jFgvlHy5j100.jpg", 8),
-    )
+
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle()
     
     LazyColumn(
         modifier = Modifier
@@ -26,8 +24,8 @@ fun TopPostsScreen(
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(posts.size) {
-            TopPostCard(post = posts[it])
+        items(viewState.value.posts.size) {
+            TopPostCard(post = viewState.value.posts[it])
         }
     }
 }
