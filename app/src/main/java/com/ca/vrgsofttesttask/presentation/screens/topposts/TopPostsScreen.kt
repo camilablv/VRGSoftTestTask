@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.ca.vrgsofttesttask.presentation.components.TopPostCard
 
 @Composable
@@ -17,6 +18,7 @@ fun TopPostsScreen(
 ) {
 
     val viewState = viewModel.viewState.collectAsStateWithLifecycle()
+    val posts = viewModel.posts().collectAsLazyPagingItems()
     
     LazyColumn(
         modifier = Modifier
@@ -24,8 +26,8 @@ fun TopPostsScreen(
         contentPadding = PaddingValues(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(viewState.value.posts.size) {
-            TopPostCard(post = viewState.value.posts[it])
+        items(posts.itemCount) { index ->
+            posts[index]?.let { post -> TopPostCard(post = post) }
         }
     }
 }

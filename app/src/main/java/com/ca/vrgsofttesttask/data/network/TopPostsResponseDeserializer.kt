@@ -16,14 +16,27 @@ class TopPostsResponseDeserializer: JsonDeserializer<TopPostsResponse> {
     ): TopPostsResponse {
         val gson = Gson()
 
-        val posts = json
-            ?.asJsonObject?.get("data")
+        val jsonData = json?.asJsonObject?.get("data")
+
+        val posts = jsonData
             ?.asJsonObject?.get("children")
             ?.asJsonArray?.map {
                 val child = it.asJsonObject?.get("data")
                 gson.fromJson(child, Post::class.java)
             }
 
-        return TopPostsResponse(posts ?: emptyList())
+        val before: String? = jsonData?.asJsonObject?.get("before")?.asStringOrNull()
+
+        val after = jsonData?.asJsonObject?.get("after")?.asStringOrNull()
+
+        return TopPostsResponse(
+            before = before,
+            posts = posts ?: emptyList(),
+            after = after
+        )
     }
+}
+
+private fun JsonElement.asStringOrNull(): String? {
+    return if (isJsonNull) null else asString
 }
