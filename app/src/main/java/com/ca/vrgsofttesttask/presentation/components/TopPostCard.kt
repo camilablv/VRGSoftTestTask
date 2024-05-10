@@ -65,7 +65,6 @@ fun TopPostCard(
                 )
 
                 CommentCountText(count = post.commentCount)
-
             }
 
             Box(
@@ -77,7 +76,9 @@ fun TopPostCard(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxSize()
-                        .clickable {
+                        .clickable(
+                            enabled = isThumbnailEnabled.value
+                        ) {
                             onThumbnailClick()
                         },
                     model = ImageRequest.Builder(LocalContext.current)
