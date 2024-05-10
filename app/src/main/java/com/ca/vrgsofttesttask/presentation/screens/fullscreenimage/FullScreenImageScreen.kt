@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -19,6 +20,9 @@ fun FullScreenImageScreen(
     imageUrl: String,
     onCloseButtonClick: () -> Unit
 ) {
+    val contentScale = if (LocalConfiguration.current.screenWidthDp >= 600) ContentScale.FillHeight
+        else ContentScale.FillWidth
+
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -45,7 +49,7 @@ fun FullScreenImageScreen(
                 )
                 .build(),
             contentDescription = null,
-            contentScale = ContentScale.FillWidth,
+            contentScale = contentScale,
             clipToBounds = true
         )
     }
