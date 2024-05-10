@@ -1,5 +1,6 @@
 package com.ca.vrgsofttesttask.presentation.screens.fullscreenimage
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -34,6 +35,14 @@ fun FullScreenImageScreen(
                 .fillMaxSize(),
             model = ImageRequest.Builder(LocalContext.current)
                 .data(imageUrl)
+                .error(R.drawable.error)
+                .listener(
+                    onSuccess = {req, result ->
+                        Log.d("IMAGE REQUEST", "$req, $result")
+                    }, onError = {req, result ->
+                        Log.d("IMAGE REQUEST", "$req, $result")
+                    }
+                )
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,

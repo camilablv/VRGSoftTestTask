@@ -26,7 +26,7 @@ fun AppNavHost(
     ) {
         composable(Routes.Posts.route) {
             TopPostsScreen { imageUrl ->
-                navHostController.navigate("${Routes.FullScreenImage.route}?$argName={$imageUrl}")
+                navHostController.navigate("${Routes.FullScreenImage.route}?$argName=$imageUrl")
             }
         }
 
