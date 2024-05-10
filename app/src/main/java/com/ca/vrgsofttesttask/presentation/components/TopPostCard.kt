@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.ca.vrgsofttesttask.R
 import com.ca.vrgsofttesttask.domain.model.Post
+import com.ca.vrgsofttesttask.utils.getRelativeTime
 
 @Composable
 fun TopPostCard(
@@ -53,7 +54,7 @@ fun TopPostCard(
                 )
 
                 Text(
-                    text = post.created.toString(),
+                    text = getRelativeTime(post.created),
                     style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Medium)
                 )
 
