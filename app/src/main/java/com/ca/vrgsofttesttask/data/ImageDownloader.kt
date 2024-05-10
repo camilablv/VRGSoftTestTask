@@ -14,7 +14,7 @@ class ImageDownloader(context: Context) {
             .setMimeType("image/jpeg")
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setTitle(url.split("/").last())
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, url.split("/").last())
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, "${System.currentTimeMillis()}.jpeg")
         return downloadManager.enqueue(request)
     }
 }
