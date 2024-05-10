@@ -30,7 +30,8 @@ import com.ca.vrgsofttesttask.utils.getRelativeTime
 @Composable
 fun TopPostCard(
     post: Post,
-    onThumbnailClick: () -> Unit
+    onThumbnailClick: () -> Unit,
+    onDownloadClick: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -82,7 +83,7 @@ fun TopPostCard(
 
                 post.imageThumbnail?.let {
                     IconButton(id = R.drawable.download) {
-
+                        onDownloadClick(post.imageUrl)
                     }
                 }
             }
