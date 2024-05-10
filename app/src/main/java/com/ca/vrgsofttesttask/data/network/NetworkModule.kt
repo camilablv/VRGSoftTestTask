@@ -1,6 +1,6 @@
 package com.ca.vrgsofttesttask.data.network
 
-import com.ca.vrgsofttesttask.domain.model.TopPostsResponse
+import com.ca.vrgsofttesttask.data.model.TopPostsResponse
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

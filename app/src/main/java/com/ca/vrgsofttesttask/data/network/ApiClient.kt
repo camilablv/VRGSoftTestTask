@@ -1,6 +1,6 @@
 package com.ca.vrgsofttesttask.data.network
 
-import com.ca.vrgsofttesttask.domain.model.TopPostsResponse
+import com.ca.vrgsofttesttask.data.model.TopPostsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -1,7 +1,7 @@
-package com.ca.vrgsofttesttask.domain.model
+package com.ca.vrgsofttesttask.data.model
 
 data class TopPostsResponse(
     val before: String?,
-    val posts: List<Post>,
+    val posts: List<PostResponse>,
     val after: String?
 )

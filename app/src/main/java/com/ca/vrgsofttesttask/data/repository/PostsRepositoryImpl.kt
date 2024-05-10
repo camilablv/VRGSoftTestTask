@@ -14,7 +14,7 @@ class PostsRepositoryImpl @Inject constructor(
     private val apiClient: ApiClient
 ) : PostsRepository {
 
-    override suspend fun posts(): Flow<PagingData<Post>> {
+    override fun posts(): Flow<PagingData<Post>> {
         return Pager(
             config = PagingConfig(pageSize = 25),
             pagingSourceFactory = { TopPostsPagingSource(apiClient) }

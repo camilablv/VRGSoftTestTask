@@ -5,5 +5,5 @@ import com.ca.vrgsofttesttask.domain.model.Post
 import kotlinx.coroutines.flow.Flow
 
 interface PostsRepository {
-    suspend fun posts(): Flow<PagingData<Post>>
+    fun posts(): Flow<PagingData<Post>>
 }
