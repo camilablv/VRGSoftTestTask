@@ -1,7 +1,7 @@
 package com.ca.vrgsofttesttask.data.network
 
-import com.ca.vrgsofttesttask.domain.model.Post
-import com.ca.vrgsofttesttask.domain.model.TopPostsResponse
+import com.ca.vrgsofttesttask.data.model.PostResponse
+import com.ca.vrgsofttesttask.data.model.TopPostsResponse
 import com.google.gson.Gson
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -22,7 +22,7 @@ class TopPostsResponseDeserializer: JsonDeserializer<TopPostsResponse> {
             ?.asJsonObject?.get("children")
             ?.asJsonArray?.map {
                 val child = it.asJsonObject?.get("data")
-                gson.fromJson(child, Post::class.java)
+                gson.fromJson(child, PostResponse::class.java)
             }
 
         val before: String? = jsonData?.asJsonObject?.get("before")?.asStringOrNull()

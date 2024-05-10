@@ -63,25 +63,25 @@ fun TopPostCard(
 
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .width(120.dp),
-                contentAlignment = Alignment.BottomEnd
-            ) {
-                AsyncImage(
+            post.imageThumbnail?.let {
+                Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .clickable {
-                            onThumbnailClick()
-                        },
-                    model = post.imageThumbnail ?: painterResource(id = R.drawable.baseline_android_24),
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
-                    clipToBounds = true
-                )
+                        .fillMaxHeight()
+                        .width(120.dp),
+                    contentAlignment = Alignment.BottomEnd
+                ) {
+                    AsyncImage(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable {
+                                onThumbnailClick()
+                            },
+                        model = post.imageThumbnail,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillHeight,
+                        clipToBounds = true
+                    )
 
-                post.imageThumbnail?.let {
                     IconButton(id = R.drawable.download) {
                         onDownloadClick(post.imageUrl)
                     }
