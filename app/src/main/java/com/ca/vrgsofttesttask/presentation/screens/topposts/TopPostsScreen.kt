@@ -14,7 +14,8 @@ import com.ca.vrgsofttesttask.presentation.components.TopPostCard
 
 @Composable
 fun TopPostsScreen(
-    viewModel: PostsViewModel = hiltViewModel()
+    viewModel: PostsViewModel = hiltViewModel(),
+    navigateToFullScreenImage: (String) -> Unit
 ) {
 
     val viewState = viewModel.viewState.collectAsStateWithLifecycle()
@@ -27,7 +28,14 @@ fun TopPostsScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(posts.itemCount) { index ->
-            posts[index]?.let { post -> TopPostCard(post = post) }
+            posts[index]?.let { post ->
+                TopPostCard(
+                    post = post,
+                    onThumbnailClick = {
+                        navigateToFullScreenImage(post.imageUrl)
+                    }
+                )
+            }
         }
     }
 }
