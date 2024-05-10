@@ -1,5 +1,6 @@
 package com.ca.vrgsofttesttask.data.model
 
+import android.webkit.URLUtil
 import com.ca.vrgsofttesttask.domain.model.Post
 import com.google.gson.annotations.SerializedName
 
@@ -12,11 +13,13 @@ data class PostResponse(
 )
 
 fun PostResponse.toPost(): Post {
+
     return Post(
         author = this.author,
         created = this.created,
-        imageThumbnail = this.imageThumbnail,
+        imageThumbnail = if (URLUtil.isValidUrl(this.imageThumbnail)) this.imageThumbnail else null,
         imageUrl = this.imageUrl,
         commentCount = this.commentCount
     )
 }
+
