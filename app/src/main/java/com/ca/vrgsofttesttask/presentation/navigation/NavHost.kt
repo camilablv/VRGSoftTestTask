@@ -2,19 +2,18 @@ package com.ca.vrgsofttesttask.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.ca.vrgsofttesttask.presentation.screens.fullscreenimage.FullScreenImageScreen
 import com.ca.vrgsofttesttask.presentation.screens.topposts.TopPostsScreen
+import kotlinx.serialization.Serializable
 
-internal sealed class Routes(val route: String) {
-    object Posts : Routes("posts")
-    object FullScreenImage : Routes("image")
+@Serializable
+internal sealed class Screen() {
+    @Serializable object Posts : Screen()
+    @Serializable data class FullScreenImage(val imageUrl: String) : Screen()
 }
-
-const val argName = "imageUrl"
 
 @Composable
 fun AppNavHost(
@@ -22,20 +21,17 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Routes.Posts.route
+        startDestination = Screen.Posts
     ) {
-        composable(Routes.Posts.route) {
+        composable<Screen.Posts> {
             TopPostsScreen { imageUrl ->
-                navHostController.navigate("${Routes.FullScreenImage.route}?$argName=$imageUrl")
+                navHostController.navigate(Screen.FullScreenImage(imageUrl))
             }
         }
 
-        composable(
-            route = "${Routes.FullScreenImage.route}?$argName={$argName}",
-            arguments = listOf(navArgument(argName) { type = NavType.StringType })
-        ) {
-
-            FullScreenImageScreen(imageUrl = it.arguments?.getString(argName) ?: "") {
+        composable<Screen.FullScreenImage> {backStackEntry ->
+            val route = backStackEntry.toRoute<Screen.FullScreenImage>()
+            FullScreenImageScreen(imageUrl = route.imageUrl) {
                 navHostController.popBackStack()
             }
         }
